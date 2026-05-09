@@ -222,34 +222,43 @@ fun CharacterDetailContent(
             Spacer(modifier = Modifier.height(24.dp))
 
             // Episodes Section
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column {
-                    Text(
-                        text = "First Appeared Episodes",
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = "The chronological debut of this character in the multiverse.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
-                    )
+            if (episodes.isNotEmpty()) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text(
+                            text = "First Appeared Episodes",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "The chronological debut of this character in the multiverse.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary
+                        )
+                    }
+                    TextButton(onClick = { /* TODO */ }) {
+                        Text("VIEW ALL", color = RickGreenDark, fontWeight = FontWeight.Bold)
+                        Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp), tint = RickGreenDark)
+                    }
                 }
-                TextButton(onClick = { /* TODO */ }) {
-                    Text("VIEW ALL", color = RickGreenDark, fontWeight = FontWeight.Bold)
-                    Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(16.dp), tint = RickGreenDark)
+                
+                Spacer(modifier = Modifier.height(16.dp))
+
+                episodes.take(3).forEach { episode ->
+                    EpisodeCard(episode = episode)
+                    Spacer(modifier = Modifier.height(12.dp))
                 }
-            }
-            
-            Spacer(modifier = Modifier.height(16.dp))
-            
-            episodes.take(3).forEach { episode ->
-                EpisodeCard(episode = episode)
-                Spacer(modifier = Modifier.height(12.dp))
+            } else {
+                Text(
+                    text = "No episodes recorded for this character.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextSecondary,
+                    modifier = Modifier.padding(vertical = 16.dp)
+                )
             }
 
             Spacer(modifier = Modifier.height(24.dp))

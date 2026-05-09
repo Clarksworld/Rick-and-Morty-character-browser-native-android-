@@ -1,1 +1,0 @@
-# Rick-and-Morty-character-browser-native-android-
